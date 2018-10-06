@@ -1,0 +1,30 @@
+#+TITLE: 100 Days Of Code - Log
+
+* Day 0: October 05, 2018
+
+** Today's Progress
++ Set up basic evironment
++ System: Mac Mojave
++ Editor: Emacs
++ Emacs dotfiles:
+  
+* Day 1: October 06, 2018
+
+** Today's Progress
++ Finished Week one lessions video.
++ Set up Ocaml evironment with Emacs.
++ Write some basic ocaml code.
+  
+** Thoughts:
+Ocaml is similar with Standard ML, And has lots of advantage.For example
+
+The key additional ingredients
++ type inference: you don’t need to
+write them!
++ pattern-matching: life saving data
+manipulation feature!
+
+In 2000 Jacques Garrigue’s extended Objective Label branch with
+polymorphic methods, labeled and optional arguments, and polymorphic
+variants, and In 2011 the name is definitely changed to Ocaml.
+

@@ -12,5 +12,8 @@ Emacs dotfiles: [.doom]()
 
 **Thoughts:**  
 
-**Link to work:** [Calculator App](http://www.example.com)
+**Link to work:** 
+
+### Day 1: October 06, 2018
+**Today's Progress**: Finished Week one video lessions.
 
