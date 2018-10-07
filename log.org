@@ -28,3 +28,14 @@ In 2000 Jacques Garrigue’s extended Objective Label branch with
 polymorphic methods, labeled and optional arguments, and polymorphic
 variants, and In 2011 the name is definitely changed to Ocaml.
 
+* Day 2: October 07, 2018
+
+** Today's Progress
+Read these materials.
+[[http://palmstroem.blogspot.com/2012/05/lambda-calculus-for-absolute-dummies.html][The lanbda Calculus for Absolute Dummies]]
+[[https://www.fun-mooc.fr/asset-v1:parisdiderot+56002+session03+type@asset+block/pdf_backus_turingaward_lecture.pdf][Can Programming Be Liberated from the von Neumann Style? A Functonal and ItsAlgebra of Programs]]
+
+** Thoughts:
+Turing Maching is designed for complicated calucations. It combing two parts ,
+First is condition, Second is do, Just like If condition then do.
+
