@@ -39,3 +39,21 @@ Read these materials.
 Turing Maching is designed for complicated calucations. It combing two parts ,
 First is condition, Second is do, Just like If condition then do.
 
+
+* Day 3: October 08, 2018 
+
+** Today's Progress
++ Learn some basic ocaml syntax.
++ Read Real World Ocaml 
++ Try to install utop in Emacs, but not success
++ Write some notes about functional programming
+  
+** Thoughts:
+
+ Why choose ocaml for learning.
+ Beacuse, The learning curve of Ocaml is less than Haskell. and Ocaml is easy to
+ work. For example, After finished ,I can choose Reasonml for further advance
+ learning. Reasonml is created by Facebook, just like clojurescript,
+ typescript.. Second Ocaml community is very nice to newbee, and As a Emacser
+ can write ocaml than any other editor or IDE user. Third Ocaml is fu....ing insteresting. 
+ 
