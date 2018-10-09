@@ -56,4 +56,18 @@ First is condition, Second is do, Just like If condition then do.
  learning. Reasonml is created by Facebook, just like clojurescript,
  typescript.. Second Ocaml community is very nice to newbee, and As a Emacser
  can write ocaml than any other editor or IDE user. Third Ocaml is fu....ing insteresting. 
- 
+
+* Day 4: October 09, 2018
+
+** Today's Progress
++ Read Real World Ocaml
++ Write somthing about Ocaml syntax
+  
+** Thoughts:
+
+Programming languages have base types, like int, bool, and unit and 
+Compound types.
+
++ “Each-of”: A compound type t describes values that contain each of values of type t1, t2, ..., and tn.
++ “One-of”: A compound type t describes values that contain a value of one of the types t1, t2, ..., or tn.
++ “Self-reference”: A compound type t may refer to itself in its definition in order to describe recursive data structures like lists and trees.
