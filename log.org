@@ -71,3 +71,58 @@ Compound types.
 + “Each-of”: A compound type t describes values that contain each of values of type t1, t2, ..., and tn.
 + “One-of”: A compound type t describes values that contain a value of one of the types t1, t2, ..., or tn.
 + “Self-reference”: A compound type t may refer to itself in its definition in order to describe recursive data structures like lists and trees.
+
+* Day 5: October 10, 2018
+
+** Today's Progress
++ Read Real World Ocaml
++ Try to solve org-babel ocaml problem:
+  Error: Unbound module Base
++ Learn something Ocaml syntax: Records and Variant, pattern-matching
++ Write notes about what I have learnt today
+  
+** Thoughts:
+
+Ocaml is similar with Emacs in some field, For example, ocaml has init file
+Named .ocamlinit. It helps ocaml load module, but something wrong with org-mode.
+When I write some like this.
+
+#+BEGIN_SRC ocaml
+open Base;;
+
+#+END_SRC
+
+the results returned Error:
+Error: Unbound module Base.
+
+I set ocaml init file in current diretory, (.ocamlinit).
+
+#+BEGIN_SRC ocaml
+
+
+(* Ensure that we're in the root of the project. This is helpful for
+   editor integration where the cwd might not be the root of the
+   project.*)
+let root =
+  let rec search path = match Sys.file_exists (path ^ "/.ocamlinit") with
+  | false -> search (Filename.dirname path)
+  | true -> path
+  in search (Sys.getcwd ())
+in Sys.chdir root;;
+
+#use "topfind";;
+#require "batteries";;
+#require "core";;
+#require "async";;
+#require "cohttp";;
+#require "cohttp.async";;
+#directory "_build";;
+
+#+END_SRC
+
+But the top of repl return error.
+
+Cannot find file topfind.
+Unknown directive 'require'
+
+To sum up, may be tomorrow, I can fix this.
