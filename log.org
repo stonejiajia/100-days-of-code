@@ -126,3 +126,16 @@ Cannot find file topfind.
 Unknown directive 'require'
 
 To sum up, may be tomorrow, I can fix this.
+
+* Day 6: October 11, 2018
+
+** Today's Progress
++ Read Real World Ocaml
++ Watch week two video
++ Do some exercise of week two
+  
+** Thoughts
+
+I changed OCaml Repl to utop, It is a perpect tool to interactive with code.
+Specially, Write code on org-mode, Maybe the most comfortable experience than
+any other languages on org-mode.
