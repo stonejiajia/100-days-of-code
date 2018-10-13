@@ -154,6 +154,5 @@ for seqarate compliation are not Enough.
 
 To support module programming, a languages must provide good glue
 Functonal programming languages provide two new kinds of glue
-higher-order functions and lazy evaluation. So functional program is messy or 
-complicated, the programmer should attempt to modularize it and to generlize
-the parts.
+higher-order functions and lazy evaluation. So functional programs are so much
+smaller and eaiser to write than conventional ones.
