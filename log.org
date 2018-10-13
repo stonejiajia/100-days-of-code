@@ -127,7 +127,7 @@ Unknown directive 'require'
 
 To sum up, may be tomorrow, I can fix this.
 
-* Day 6: October 11, 2018
+* Day 6: October 12, 2018
 
 ** Today's Progress
 + Read Real World Ocaml
@@ -139,3 +139,21 @@ To sum up, may be tomorrow, I can fix this.
 I changed OCaml Repl to utop, It is a perpect tool to interactive with code.
 Specially, Write code on org-mode, Maybe the most comfortable experience than
 any other languages on org-mode.
+
+
+* Day 7: October 13, 2018
+
+** Today's Progress
++ Watch Week two video
++ Do some exercise of week two
++ Read why Functonal programming matters
+  
+** Thoughts 
+Modularity is the key to successful programming, New scope rules and mechanisms
+for seqarate compliation are not Enough.
+
+To support module programming, a languages must provide good glue
+Functonal programming languages provide two new kinds of glue
+higher-order functions and lazy evaluation. So functional program is messy or 
+complicated, the programmer should attempt to modularize it and to generlize
+the parts.
