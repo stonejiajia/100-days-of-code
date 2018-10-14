@@ -156,3 +156,34 @@ To support module programming, a languages must provide good glue
 Functonal programming languages provide two new kinds of glue
 higher-order functions and lazy evaluation. So functional programs are so much
 smaller and eaiser to write than conventional ones.
+
+* Day 8: October 14, 2018
+
+** Today's Progress
+
++ Watch Week three video
++ Finished Week two exercise
++ Read Real World OCaml
+  
+** Thoughts
+
+ Records: Another Approach to “Each-of” Types
+ 
+ Record types are “each-of” types where each component is a named field. For example, the type
+{foo : int, bar : int*bool, baz : bool*int} describes records with three fields
+named foo, bar, and baz. This is just a new sort of type, just like tuple types
+were new when we learned them.A record expression builds a record value. For example, the expression
+{bar = (1+2,true andalso true), foo = 3+4, baz = (false,9) } would evaluate to
+the record value {bar = (3,true), foo = 7, baz = (false,9)}, which can have type
+{foo : int, bar : int*bool, baz : bool*int} because the order of fields never
+matters(we use the field names instead). In general the syntax for a record
+expression is {f1 = e1, ..., fn = en} where,as always, each ei can be any
+expression. Here each f can be any field name (though each must be different). 
+A field name is basically any sequence of letters or numbers.
+In ML, we do not have to declare that we want a record type with particular
+field names and field types — we just write down a record expression and the
+type-checker gives it the right type. The type-checking rules for record
+expressions are not surprising: Type-check each expression to get some type ti
+and then build the record type that has all the right fields with the right
+types.Because the order of field names never matters, the REPL always
+alphabetizes them when printing just for consistency.
