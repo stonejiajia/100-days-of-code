@@ -187,3 +187,18 @@ expressions are not surprising: Type-check each expression to get some type ti
 and then build the record type that has all the right fields with the right
 types.Because the order of field names never matters, the REPL always
 alphabetizes them when printing just for consistency.
+
+* Day 9: October 15, 2018
+
+** Today's Progess
+
++ Watch Week three video
++ Read Real World OCaml
+
+** Thoughts
+ Records and tuples are very similar. They are both "each-of" constructs that
+ allow any number of components. The only real difference is that records are
+ "by name" and tuples are "by position". This means with records we build them 
+ and access their by using field name, But tuples access their by position.
+ 
+ By name versus by poisition is a classic decision when designing a languages
