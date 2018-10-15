@@ -201,4 +201,6 @@ alphabetizes them when printing just for consistency.
  "by name" and tuples are "by position". This means with records we build them 
  and access their by using field name, But tuples access their by position.
  
- By name versus by poisition is a classic decision when designing a languages
+ By name versus by poisition is a classic decision when designing a languages.
+
+* Day 10: October 16, 2018
