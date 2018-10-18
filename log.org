@@ -225,3 +225,102 @@ It is syntactic because we can descirbe everythng about tuples in terms of
 equivalent record syntax. It is sygar beacuse it makes the language sweeter. The 
 term syntactic sugar is widely used. Syntactic sygar is great way to keep the
 key ideas in programming-language small
+
+* Day 11: October 18, 2018
+
+** Today's Progress
++ Read Real World OCaml
+  
+** Thoughts
+
+Optional arguments in OCaml
+
+#+BEGIN_SRC ocaml
+let concat ?sep x y =
+  let sep = match sep with None -> "" | Some x -> x in
+  x ^ sep ^ y
+
+#+END_SRC
+
+#+RESULTS:
+: val concat :
+:   ?sep:Base.String.t -> Base.String.t -> Base.String.t -> Base.String.t =
+:   <fun>
+
+And also could same results
+
+#+BEGIN_SRC ocaml
+let concat ?(sep="") x y = x ^ sep ^ y
+#+END_SRC
+
+#+RESULTS:
+: val concat :
+:   ?sep:Base.String.t -> Base.String.t -> Base.String.t -> Base.String.t =
+:   <fun>
+
+when without optional arguments
+
+#+BEGIN_SRC ocaml
+concat "A" "B"
+
+#+END_SRC
+
+#+RESULTS:
+: "AB"
+
+Need optional arguments
+
+#+BEGIN_SRC ocaml
+concat ~sep:":" "A" "B"
+
+#+END_SRC
+
+#+RESULTS:
+: "A:B"
+
+#+BEGIN_SRC ocaml
+concat "A" ~sep:":" "B"
+ 
+#+END_SRC
+
+#+RESULTS:
+: "A:B"
+
+When to erase optional arguments
+
+#+BEGIN_SRC ocaml
+let prepend_pound = concat "# "
+#+END_SRC
+
+#+RESULTS:
+: <fun>
+
+#+BEGIN_SRC ocaml
+prepend_pound "a BASH comment"
+#+END_SRC
+
+#+RESULTS:
+: "# a BASH comment"
+
+#+BEGIN_SRC ocaml
+prepend_pound "a BASH comment" ~sep:":" "Hello"
+#+END_SRC
+
+#+RESULTS:
+: Characters 0-13:
+:   prepend_pound "a BASH comment" ~sep:":" "Hello";;
+:   ^^^^^^^^^^^^^
+: Error: This function has type Base.String.t -> Base.String.t
+:        It is applied to too many arguments; maybe you forgot a `;'.
+
+Somthing Wrong happened.
+
+ Characters 0-13:
+   prepend_pound "a BASH comment" ~sep:":";;
+   ^^^^^^^^^^^^^
+ Error: This function has type Base.String.t -> Base.String.t
+        It is applied to too many arguments; maybe you forgot a `;'.
+
+Optional arguments is earsed as soon as the first positional arguments defined
+after the optional argument is passed in 
+
