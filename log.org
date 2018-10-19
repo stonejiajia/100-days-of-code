@@ -324,3 +324,20 @@ Somthing Wrong happened.
 Optional arguments is earsed as soon as the first positional arguments defined
 after the optional argument is passed in 
 
+
+* Day 12: October 19, 2018
+
+** Today's Progress 
++ Just Read Real World Ocaml
+
+** Thoughts
+
+How ML Provides Access to Datatype Values: Case Expressions
+In one sense, a case-expression is like a more powerful if-then-else expression
+Like a conditional expression, it evaluates two of its subexpressions: first the 
+expression between the case and of keywords and second the expression in the
+first branch that matches. But instead of having two branches (one for true and one
+for false), we can have one branch for each variant of our datatype (and we will generalize
+this further below). Like conditional expressions, each branch’s expression must have
+the same type (int in the example above) because the type-checker cannot know what
+branch will be used.
