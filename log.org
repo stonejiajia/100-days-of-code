@@ -341,3 +341,12 @@ for false), we can have one branch for each variant of our datatype (and we will
 this further below). Like conditional expressions, each branch’s expression must have
 the same type (int in the example above) because the type-checker cannot know what
 branch will be used.
+
+* Day 13: October 20, 2018
+
+** Today's Progess 
++ Read Real World OCaml
+
+** Thoughts
++ List.fold is a very general and powerful function.
++ In ML language ,pattern matching is powerful than if statement
