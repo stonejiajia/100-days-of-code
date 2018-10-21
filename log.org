@@ -350,3 +350,43 @@ branch will be used.
 ** Thoughts
 + List.fold is a very general and powerful function.
 + In ML language ,pattern matching is powerful than if statement
+
+* Day 14: October 21, 2018
+
+** Today's Progess
++ Read Real World Ocaml
++ Watch Week four videos
++ Learn Standard_ML
+  
+** Thoughts
++ How to writing efficient recursive functions in functional language
++ How to use accumulators as technigue to make some function tail recursive
+  
+#+BEGIN_SRC sml
+fun sum1 xs = 
+    case xs of 
+        [] -> 0
+     | i:xs' => i + sum1 xs';;
+
+#+END_SRC
+
+#+RESULTS:
+: stdIn:10.12 Error: syntax error found at ARROW
+
+#+BEGIN_SRC sml
+fun sum2 xs = 
+    let fun f (xs,acc) = 
+            case xs of 
+                [] -> acc
+             | i::xs' => f(xs', i+acc)
+    in 
+        f(xs,0)
+    end;;
+
+#+END_SRC
+
+#+RESULTS:
+: stdIn:4.20 Error: syntax error found at ARROW
+
+Both functions compute the same results, but sumw using a local helper function
+takes an extra arguments, called acc for "accumulators"
