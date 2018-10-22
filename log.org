@@ -344,7 +344,7 @@ branch will be used.
 
 * Day 13: October 20, 2018
 
-** Today's Progess 
+** Today's Progress 
 + Read Real World OCaml
 
 ** Thoughts
@@ -390,3 +390,52 @@ fun sum2 xs =
 
 Both functions compute the same results, but sumw using a local helper function
 takes an extra arguments, called acc for "accumulators"
+
+* Day 15: October 22, 2018
+
+** Today's Progress
++ Read Real World OCaml
++ Learn how to use Dune
+
+** Thoughts 
+
+Dune is something similar lein in Clojure. It is a project creater build our
+app.
+dune files are written using S-expressions (those lisp-y parentheses). Each of 
+the top-level elements are called stanzas, and currently we have one stanzas.
+
+Simplest usesage
+
++ Creat a Dun file 
+  #+BEGIN_SRC scheme
+
+  (executable
+    (name main))
+
+  #+END_SRC
+
+
++ Creat a ml file
+  
+  #+BEGIN_SRC ocaml
+
+  let () = 
+    print_endline "Hello, world"
+
+  #+END_SRC
+  
++ Build Dune
+  
+#+BEGIN_SRC sh
+dune build main.exe
+
+#+END_SRC
+
++ Finally run main.exe
+  
+#+BEGIN_SRC sh
+dune exec ./main.exe
+
+#+END_SRC
+
+Hello, World!
