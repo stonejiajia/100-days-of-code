@@ -440,4 +440,3 @@ dune exec ./main.exe
 
 Hello, World!
 
- Haskell 指南
