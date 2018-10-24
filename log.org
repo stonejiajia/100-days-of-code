@@ -440,3 +440,48 @@ dune exec ./main.exe
 
 Hello, World!
 
+
+* Day 16: October 24, 2018
+
+** Today's Progress
+
++ Watch Week Four Video
++ Watch coursera Standard_ML week three video
++ Read Real World OCaml
+  
+** Thoughts
+
+let <variable> = <expr>
+
+expr can be function or variable 
+
+#+BEGIN_SRC ocaml
+let x = 3;;
+
+#+END_SRC
+
+#+RESULTS:
+: 3
+
+but in ocaml can't use record in let 
+#+BEGIN_SRC ocaml
+let x = {name : Stone}
+
+#+END_SRC
+
+
+: Characters 21-22:
+:   let x = {name : Stone};;
+:                        ^
+: Error: Syntax error
+
+When function in let expr 
+
+#+BEGIN_SRC ocaml
+let transforms = [ String.uppercase, String.lowercase ]
+#+END_SRC
+
+#+RESULTS:
+: val transforms :
+:   ((Base.string -> Base.string) * (Base.string -> Base.string)) Base__List.t =
+:   [(<fun>, <fun>)]
