@@ -485,3 +485,62 @@ let transforms = [ String.uppercase, String.lowercase ]
 : val transforms :
 :   ((Base.string -> Base.string) * (Base.string -> Base.string)) Base__List.t =
 :   [(<fun>, <fun>)]
+
+
+* Day 17: October 25, 2018
+
+** Today's Progress
++ Watch Week Four Video
++ Do Week Four Exercises and homewok
+  
+  
+** Thoughts
+Where reasonably elegant, feasible, and important, 
+rewriting functions to be tail-recursive can be much more efficient
++ Tail-recursive: recursive calls are tail-calls
+  
+
+There is a methodology that can often guide this transformation:
++ Create a helper function that takes an accumulator
++ Old base case becomes initial accumulator
++ New base case becomes final accumulator
+  
+#+BEGIN_SRC sml
+fun fact n =
+    let fun aux(n,acc) =
+           if n=0
+           then acc
+           else aux(n-1,acc*n)
+    in
+       aux(n,1)
+    end
+val x = fact 3
+
+#+END_SRC
+
+#+BEGIN_SRC ocaml
+fun sum xs =
+   case xs of
+       [] => 0
+     | x::xs’ => x + sum xs’
+
+#+END_SRC
+
+#+BEGIN_SRC ocaml 
+fun sum xs =
+    let fun aux(xs,acc) =
+      case xs of 
+        [] => acc
+        | x::xs’ => aux(xs’,x+acc)
+    in
+       aux(xs,0)
+    end
+
+#+END_SRC
+
+1. For fact and sum, tail-recursion is faster but both ways linear time
+2. Non-tail recursive rev is quadratic because each recursive call
+   uses append, which must traverse the first list
+   + And 1+2+...+(length-1) is almost length*length/2
+   + Moral: beware list-append, especially within outer recursion
+3. Cons constant-time (and fast), so accumulator version much better
