@@ -544,3 +544,38 @@ fun sum xs =
    + And 1+2+...+(length-1) is almost length*length/2
    + Moral: beware list-append, especially within outer recursion
 3. Cons constant-time (and fast), so accumulator version much better
+ 
+* Day 18: October 29, 2018
+
+** Today's Progress
++ Watch Week Four Video
++ Read Real World Ocaml
++ Read OCaml for very beginner
+  
+** Thoughts
+Table: Complex of Matching and Unification Problems
+
+| E | Matching    | Undification |
+|---+-------------+--------------|
+| ¢ | linear      | linear       |
+| U | NP-complete | Np-complete  |
+| I | Np-complete | Np-complete  |
+|   |             |              |
+
+......
+
+
+#+TBLFM: 
+
+
+As the table indicates, in most cases, both matching and unification
+problems turn out to be of the same order of complexity even though matching
+problem is a special case of the unification problem. The complexity
+does not seem to grow even when additional properties of function symbols
+are assumed in some cases.
+
+It also appears that for linear terms (terms in which every variable appears
+uniquely), both matching and unification problems are easier than for
+nonlinear terms (for matching, only the pattern has to be linear). This perhaps
+suggests that one of the main sources of complexity is the nonlinearity
+of terms. 
