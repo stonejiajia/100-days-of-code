@@ -579,3 +579,36 @@ uniquely), both matching and unification problems are easier than for
 nonlinear terms (for matching, only the pattern has to be linear). This perhaps
 suggests that one of the main sources of complexity is the nonlinearity
 of terms. 
+
+* Day 19: October 30, 2018
+** Today's Progress
++ Read OCaml for very beginner
+  
+** Thoughts
+*Two Different Ways of Thinking*
+
+#+BEGIN_SRC ocaml
+let rec append a b = 
+  match a with
+    [] -> b
+  | h::t -> h :: append t b
+
+#+END_SRC
+
+#+RESULTS:
+: <fun>
+
+To imagine the actions the computer might take to calculate the result:
+
++ Look at the first. If it is empty, return the second list, Otherwise, pull
+  apart the first list, looking at its head and tail. Make a recursive call
+  to append the tail to the second list, and then cons the head onto the 
+  result. Return this.
+  
+Consider each match case to be an independent statement of truth, thinking the 
+same way about the whole function
+
++ The empty list appende to another list is that list, Otherwise, the first list
+  is non-empty, so it has a head and tail , Call them h and t, Clearly append 
+  (h :: t) b is equal to h :: append t b, Since this reduces the problem size, 
+  progress is made.
