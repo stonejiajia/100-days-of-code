@@ -612,3 +612,68 @@ same way about the whole function
   is non-empty, so it has a head and tail , Call them h and t, Clearly append 
   (h :: t) b is equal to h :: append t b, Since this reduces the problem size, 
   progress is made.
+
+  
+* Day 20: October 31, 2018
+
+** Today's Progress
++ Read OCaml for very beginner
+  
+** Thoughts
+*Taking Functions as Arguments*
+
+The most common use of first-class functions is passing them as arguments to 
+other functions, so we motivate this use first.
+
+Here is a first example of a function that takes another function:
+
+#+BEGIN_SRC sml
+
+fun n_times (f, n, x) = 
+    if n=0
+    then x 
+    else f (n_times(f, n-1, x))
+
+#+END_SRC
+
+
+
+
+We can tell the argument f is a function because the last line calls f 
+with an argument. What n_times does is compute f(f(...(f(x)))) where the 
+number of calls to f is n. That is a genuinely useful helper function to 
+have around. For example, here are 3 different uses of it:
+
+#+BEGIN_SRC sml
+
+fun double x = x+x
+                     
+
+#+END_SRC
+
+#+BEGIN_SRC ocaml
+
+fun increment x = x+1
+
+#+END_SRC
+
+Like any helper function, n_times lets us abstract the common parts of multiple
+computations so we can reuse some code in different ways by passing in different
+arguments. The main novelty is making one of those arguments a function, which
+is a powerful and flexible programming idiom. It also makes perfect sense — we are
+not introducing any new language constructs here, just using ones we already 
+know in ways you may not have thought of.
+
+Once we define such abstractions, we can find additional uses for them. 
+For example, even if our program today does not need to triple any values 
+n times, maybe tomorrow it will, in which case we can just define the function
+*triple_n_times* using *n_times*:
+
+
+#+BEGIN_SRC ocaml
+
+fun triple x = 3*x
+
+fun triple_n_times (n, x) = n_times(triple, n, x)
+
+#+END_SRC
