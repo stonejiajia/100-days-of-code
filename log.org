@@ -677,3 +677,75 @@ fun triple x = 3*x
 fun triple_n_times (n, x) = n_times(triple, n, x)
 
 #+END_SRC
+
+
+* Day 21: November 2, 2018
+
+** Today's Progress
++ Read OCaml for very beginner
+
+** Thoughts
+*Anonymous functions*
+
+There is no reason that a function like triple that is passed to another function like
+ n_times needs to be defined at top-level. As usual, it is better style to
+ define such functions locally if they are needed only locally. So we could write:
+ 
+#+BEGIN_SRC sml
+
+fun triple_n_times (n,x) =
+  let fun triple x = 3*x in n_times(triple,n,x) end
+
+#+END_SRC
+
+In fact, we could give the triple function an even smaller scope: we need it only as
+the first argument to n_times, so we could have a let-expression there that evaluates 
+ to the triple function:
+ 
+ #+BEGIN_SRC sml
+fun triple_n_times (n,x) = n_times((let fun triple y = 3*y in triple end), n, x)
+
+ #+END_SRC
+ 
+ Notice that in this example, which is actually poor style, we need to have the
+ let-expression “return” triple since, as always, a let-expression produces the 
+ result of the expression between in and end. In this case, we simply look up triple 
+ in the environment, and the resulting function is the value that we then pass
+ as the first argument to n_times.
+ 
+ ML has a much more concise way to define functions right where you use them, as
+in this final, best version:
+
+#+BEGIN_SRC ocaml
+
+fun triple_n_times (n, x) = n_times ((fn y => 3 * y), n, x)
+
+#+END_SRC
+
+This code defines an anonymous function fn y => 3*y. It is a function that takes 
+an argument y and has body 3*y. The fn is a keyword and => (not =) is also part 
+of the syntax. We never gave the function a name (it is anonymous, see?), which 
+is convenient because we did not need one. We just wanted to pass a function to 
+n_times, and in the body of n_times, this function is bound to f.
+
+It is common to use anonymous functions as arguments to other functions Moreover,
+you can put an anonymous function anywhere you can put an expression — it
+simply is a value, the function itself. The only thing you cannot do with an 
+anonymous function is recursion, exactly because you have no name to use for 
+the recursive call. In such cases, you need to use a fun binding as before,
+and fun bindings must be in let-expressions or at top-level.
+
+For non-recursive functions, you could use anonymous functions with val 
+bindings instead of a fun binding. For example, these two bindings are exactly 
+the same thing:
+
+#+BEGIN_SRC sml
+fun increment x = x + 1
+val increment = fn x => x+1
+
+#+END_SRC
+
+
+They both bind increment to a value that is a function that returns its argument
+plus 1. So function-bindings are almost syntactic sugar, but they support
+recursion, which is essential.
