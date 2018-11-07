@@ -749,3 +749,91 @@ val increment = fn x => x+1
 They both bind increment to a value that is a function that returns its argument
 plus 1. So function-bindings are almost syntactic sugar, but they support
 recursion, which is essential.
+
+* Day 22: November 7, 2018
+
+** Today's Progress
++ Read OCaml for very beginner
++ Watch Week Five Video
++ Finish Week Four exercise
+  
+** Thoughts
+*** Maps and Filters
+
+Higher-order function over lists
+
+#+BEGIN_SRC sml
+fun map (f, xs) = 
+    case xs of
+        [] => []
+     | x::xs' => (f x)::(map(f, xs'));; 
+
+#+END_SRC
+
+#+RESULTS:
+
+val map = fn : ('a -> 'b) * 'a list -> 'b list
+
+
+The map function takes a list and a function f and produces a new 
+list by applying f to each element of the list. Here are two example uses:
+
+#+BEGIN_SRC sml
+fun increment x = x + 1
+#+END_SRC
+
+#+RESULTS:
+ val increment = fn : int -> int
+
+#+BEGIN_SRC sml
+val x1 = map (increment, [4, 8, 12, 16])
+
+#+END_SRC
+
+#+RESULTS:
+ val x1 = [5,9,13,17] : int list
+
+#+BEGIN_SRC sml
+val x2 = map (hd, [[1,2], [3,4], [5,6,7]])
+
+#+END_SRC
+
+#+RESULTS:
+ val x2 = [1,3,5] : int list
+
+The definition and use of map is an incredibly important idiom 
+even though our particular example is simple. We could have easily
+written a recursive function over lists of integers that incremented
+all the elements, but instead we divided the work into two parts: 
+The map implementer knew how to traverse a recursive data structure, 
+in this case a list. The map client knew what to do with the data there, 
+in this case increment each number. You could imagine either of these 
+tasks — traversing a complicated piece of data or doing some calculation 
+for each of the pieces — being vastly more complicated and best done by 
+different developers without making assumptions about the other task. That 
+is exactly what writing map as a helper function that takes a function lets us do.
+
+Here is a second very useful higher-order function for lists
+#+BEGIN_SRC sml
+fun filter (f, xs) = 
+    case xs of 
+        [] -> []
+     |  x::xs' => if f x
+                     then x::(filter (f, xs'))
+                     else filter (f, xs');;
+#+END_SRC
+
+#+RESULTS:
+: stdIn:21.10-21.16 Error: syntax error: deleting  RBRACKET ARROW LBRACKET
+
+*** Returning functons
+#+BEGIN_SRC sml
+fun double_or_triple f = 
+      if f 7
+      then fn x => 2*x
+      else fn x => 3*x;;
+
+#+END_SRC
+
+#+RESULTS:
+val double_or_triple = fn : (int -> bool) -> int -> int
