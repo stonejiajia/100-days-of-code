@@ -837,3 +837,49 @@ fun double_or_triple f =
 
 #+RESULTS:
 val double_or_triple = fn : (int -> bool) -> int -> int
+
+
+* Day 23: November 8, 2018
+
+** Today's Progress
++ Read OCaml from very beginning
+  
+** Thoughts
+*** Not just for numbers and lists
+Because ML programs tend to use lists a lot, you might forget
+that higher-order functions are useful for more than lists. Some
+of our first examples just used integers. But higher-order functions 
+also are great for our own data structures. Here we use an is_even 
+function to see if all the constants in an arithmetic expression are 
+even. We could easily reuse true_of_all_constants for any other property 
+we wanted to check. 
+ 
+#+BEGIN_SRC sml
+datatype exp = Constant of int | Negate of exp | Add of exp * exp | Multiply of exp * exp;;
+#+END_SRC
+
+#+RESULTS:
+: datatype exp
+:   = Add of exp * exp | Constant of int | Multiply of exp * exp | Negate of exp
+
+#+BEGIN_SRC sml
+
+fun true_of_all_constants(f,e) =
+    case e of
+     Constant i => f i
+   | Negate e1  => true_of_all_constants(f, e1)
+   | Add(e1,e2) => true_of_all_constants(f,e1) andalso true_of_all_constants(f,e2)
+   | Multiply(e1,e2) => true_of_all_constants(f,e1) andalso true_of_all_constants(f,e2);;
+
+#+END_SRC
+
+#+RESULTS:
+
+val true_of_all_constants = fn : (int -> bool) * exp -> bool
+
+#+BEGIN_SRC sml
+fun all_even e = true_of_all_constants(is_even,e);;
+
+#+END_SRC
+
+#+RESULTS:
