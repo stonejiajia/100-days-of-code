@@ -927,3 +927,31 @@ Function Closures
   - Will get to this feature in a bit, after simpler examples
 + Distinction between terms first-class functions and function closures is not universally understood
   - Important conceptual distinction even if terms get muddled
+
+* Day 25: November 19, 2018
+
+** Today's progress
++ Read Lambda-Calculus and Combinators, an Introduction
+** Thoughts
+*** Functions as arguments
++ We can pass one function as an argument to another function
+   – Not a new feature, just never thought to do it before
+   
++ Elegant strategy for factoring out common code
+  Replace N similar functions with calls to 1 function where
+   you pass in N different (short) functions as arguments
+   
+  #+BEGIN_SRC sml
+fun n_times (f,n,x) =
+   if n=0
+   then x
+   else f (n_times(f,n-1,x))
+fun double x = x + x
+fun increment x = x + 1
+val x1 = n_times(double,4,7)
+val x2 = n_times(increment,4,7)
+val x3 = n_times(tl,2,[4,8,12,16])
+fun double_n_times (n,x) = n_times(double,n,x)
+fun nth_tail (n,x) = n_times(tl,n,x)
+
+  #+END_SRC
