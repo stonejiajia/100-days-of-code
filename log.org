@@ -1005,3 +1005,50 @@ usage: (in-S? n) = #t if n is in S, #f otherwise
           #f))))
 
 #+END_SRC
+
+* Day 27: November 26 2018
+
+** Today's progress: 
++ Read Lambda-Calculus and Combinators, an Introduction
+  
+** Thoughts:
+
+*** What is Type Inference?
+
+
+Java, C, and ML are all examples of statically typed languages,
+meaning every binding has a type that is determined “at compile-time,”
+i.e., before any part of the program is run. The type-checker is a 
+compile-time procedure that either accepts or rejects a program. 
+By contrast, Racket, Ruby, and Python are dynamically typed languages, 
+meaning the type of a binding is not determined ahead of time and computations
+like binding 42 to x and then treating x as a string result in run-time errors.
+After we do some programming with Racket, we will compare the advantages and 
+disadvantages of static versus dynamic typing as a significant course topic.
+
+
+
+Whether type inference for a particular programming language is easy, difficult, 
+or impossible is often not obvious. It is not proportional to how permissive the
+type system is. For example, the “extreme” type systems that “accept everything”
+and “accept nothing” are both very easy to do inference for. When we say type 
+inference may be impossible, we mean this in the technical sense of
+undecidability,like the famous halting problem. We mean there are type systems 
+for which no computer program can implement type inference such that (1) the 
+inference process always terminates, (2) the inference process always succeeds 
+if inference is possible, and (3) the inference process always fails if
+inference is not possible.
+
+Fortunately, ML was rather cleverly designed so that type inference can be
+performed by a fairly straight- forward and elegant algorithm. While there are
+programs for which inference is intractably slow, programs people write in
+practice never cause such behavior. We will demonstrate key aspects of the 
+algorithm for ML type inference with a few examples. This will give you a 
+sense that type inference is not “magic.” In order to move on to other course 
+topics, we will not describe the full algorithm or write code to implement it.
+
+ML type inference ends up intertwined with parametric polymorphism — when the
+inferencer determines a function’s argument or result “could be anything” the
+resulting type uses ’a, ’b, etc. But type inference and polymorphism are
+entirely separate concepts: a language could have one or the other. For example,
+Java has generics but no inference for method argument/result types.
