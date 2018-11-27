@@ -1052,3 +1052,60 @@ inferencer determines a function’s argument or result “could be anything” 
 resulting type uses ’a, ’b, etc. But type inference and polymorphism are
 entirely separate concepts: a language could have one or the other. For example,
 Java has generics but no inference for method argument/result types.
+
+* Day 28: November 27 2018
+
+** Today's Progress
+
++ Read Lambda-Calculus and Combinators, an Introduction
+  
+** Thoughts
+
+*** Overview of ML Type Inference 
+
+how ML type inference works 
+
++ It determines the types of bindings in order, using the types of earlier
+  bindings to infer the types of later ones. This is why you cannot use 
+  later bindings in a file. (When you need to, you use mutual recursion and 
+  type inference determines the types of all the mutually recursive bindings
+  together. Mutual recursion is covered later in this section.)
+  
++ For each val or fun binding, it analyzes the binding to determine necessary
+  facts about its type. For example, if we see the expression x+1, we conclude
+  that x must have type int. We gather similar facts for function calls,
+  pattern-matches, etc.
+  
++ Afterward, use type variables (e.g., ’a) for any unconstrained types in
+  function arguments or results.
+  
++ (Enforce the value restriction — only variables and values can have
+  polymorphic types, as discusse later.)
+  
+  #+BEGIN_SRC sml
+    val x = 42;;
+    fun f(y,z,w) = if y then z+x else 0;;
+
+
+  #+END_SRC
+
+  #+RESULTS:
+  : val f = fn : bool * int * 'a -> int
+
+
+Type inference first gives x type int since 42 has type int.
+Then it moves on to infer the type for f. Next we will study,
+via other examples, a more step-by-step procedure, but here let us just list the
+key facts:
+
++ y must have type bool beacuse we test it in a conditional
+  
++ z must have tyoe int beacuse we add it to something we already determined has
+  type int
+  
++ w can have any type
+  
++ f must return an int because its body is a conditional where both branches
+  return an int. (If they disagreed, type-checking would fail.)
+  
+  So the type of f must be bool * int * ’a -> int.
