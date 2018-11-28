@@ -1109,3 +1109,119 @@ key facts:
   return an int. (If they disagreed, type-checking would fail.)
   
   So the type of f must be bool * int * ’a -> int.
+
+* Day 29: November 28 2018
+
+** Today's Progress
+
++ Read Lambda-Calculus and Combinators, an Introduction
+
+** Thoughts
+
+
+We will now work through a few examples step-by-step, generating all the facts
+that the type-inference algorithm needs. Note that humans doing type inference 
+“in their head” often take shortcuts just like humans doing arithmetic in their
+head,but the point is there is a general algorithm that methodically goes
+through the code gathering constraints and putting them together to get the
+answer.
+
+As a first example, consider inferring the type for this function:
+
+#+BEGIN_SRC sml
+fun f x =
+    let val (y,z) = x in
+        (abs y) + z
+    end;;
+#+END_SRC
+
+#+RESULTS:
+: val f = fn : int * int -> int
+
++ Looking at the first line, f must have type T1->T2 for some types T1 and T2
+  and in the function body f has this type and x has type T1.
+  
++ Looking at the val-binding, x must be a pair type (else the pattern-match
+  makes no sense), so in fact T1=T3*T4 for some T3 and T4, and y has type T3 and z has type T4.
+
++ Looking at the addition expression, we know from the context that abs has type
+  int->int, so y having type T3 means T3=int. Similarly, since abs y has type
+  int, the other argument to + must have type int, so z having type T4 means
+  T4=int.
+  
++ Since the type of the addition expression is int, the type of the
+  let-expression is int. And since the type of the let-expression is int, 
+  the return type of f is int, i.e., T2=int.
+
+Putting all these constraints together, T1=int*int (since T1=T3*T4) and T2=int,
+so f has type int*int->int.
+
+Another Example
+
+#+BEGIN_SRC sml
+fun sum xs = 
+    case xs of
+        [] => 0
+     | x::xs' => x + (sum xs');; 
+        
+
+#+END_SRC
+
+#+RESULTS:
+  *val sum = fn : int list -> int*
+
++ From the first line, there exists types T1 and T2 such that sum has type
+  T1->T2 and xs has type T1.
+  
++ Looking at the case-expression, xs must have a type that is compatible with 
+  all of the patterns. Looking at the patterns, both of them match any list, 
+  since they are built from list constructors (in the x::xs’ case the
+  subpatterns match anything of any type). So since xs has type T1, in fact
+  T1=T3 list from some type T3.
+  
++ Looking at the right-hand sides of the case branches, we know they must
+  have the same type as each other and this type is T2. Since 0 has type int, T2=int.
+
++ Looking at the second case branch, we type-check it in a context where x and
+  xs’ are available. Since we are matching the pattern x::xs’ against a T3 list, 
+  it must be that x has type T3 and xs’ has type T3 list.
+
++ Now looking at the right-hand side, we add x, so in fact T3=int. Moreover, 
+  the recursive call type- checks because xs’ has type T3 list and T3 list=T1
+  and sum has type T1->T2. Finally, since T2=int, adding sum xs’ type-checks.
+  
+Notice that before we got to sum xs’ we had already inferred everything, 
+but we still have to check that types are used consistently and reject
+otherwise.For example, if we had written sum x, that cannot type-check — it is
+inconsistent with previous facts. Let us see this more thoroughly to see what
+happens:
+
+#+BEGIN_SRC sml
+
+fun broken_sum xs = 
+    case xs of 
+        [] => 0
+     | x::xs' => x + (broken_sum x);;
+
+#+END_SRC
+
+#+RESULTS:
+: stdIn:36.5-38.36 Error: case object and rules don't agree [overload conflict]
+:   rule domain: [int ty] list
+:   object: [int ty]
+:   in expression:
+:     (case xs
+:       of nil => 0
+
++ Type inference for broken_sum proceeds largely the same as for sum. The first 
+  four bullets from the previous example all apply, giving broken_sum type T3
+  list ->int, x3 type T3 list, x type T3, and xs’ type T3 list. Moreover,
+  T3=int.
+  
++ We depart from the correct sum implementation with the call broken_sum x. 
+  For this call to type- check, x must have the same type as broken_sum’s
+  parameter,or in other words, T1=T3. However, we know that T1=T3 list, so this 
+  new constraint T1=T3 actually generates a contradiction: T3=T3 list. If we
+  want to be more concrete, we can use our knowledge that T3=int to rewrite this 
+  as int=int list. Looking at the definition of broken_sum it should be obvious
+  that this is exactly the problem: we tried tousexasanintandasanint list.
